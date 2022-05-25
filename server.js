@@ -1,40 +1,31 @@
 const express = require('express')
-const {Server: ioServer} = require('socket.io')
-const http = require ('http')
-const app = express ()
-
+const {Server: ioserver} = require('socket.io')
+const Contenedor = require('./class.js')
+const app = express()
+const http = require('http')
+const routes = require('./routes.js')
 
 const httpServer = http.createServer(app)
-const io = new ioServer(httpServer)
-
-
-app.use(express.static(__dirname+'/public'))
-
-const messages = [
-    {user: 'Jose', msg: 'Buen dia'},
-    {user: 'Pedro', msg: 'Que tal?'},
-    {user: 'Manuel', msg: 'Como estan todos?'},
-]
+const io = new ioserver(httpServer)
 
 
 
+app.set('views', './views')
+app.set('view engine', 'ejs')
 
 
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use('/api/productos', routes)
+app.use(express.static(__dirname+"/public"))
 
 
-
-
-
-// NEW SV
-io.on('connection', (socket) =>{
-    socket.emit('messages', messages)
-    console.log('Websocket working', socket.id)
-})
-
+//startup sv
 const PORT = 8080
-httpServer.listen(PORT, () =>{
-    console.log(`Server online. Port ${PORT}`)
+httpServer.listen(PORT, ()=>{
+    console.log(`PORT ${PORT} ONLINE`)
 })
+
 
 
 

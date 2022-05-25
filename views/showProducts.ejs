@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ejsStyle.css">
+    <title>Show products (EJS)</title>
+</head>
+
+<body>
+    <div>
+        <br>
+        <h2>List of products</h2>
+
+        <% if(products){ %>
+            <table class='table'>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Img</th>
+                </tr>
+                <% products.forEach(product=>{ %>
+                    <tr>
+                        <td>
+                            <%= product.id %>
+                        </td>
+                        <td>
+                            <%= product.title %>
+                        </td>
+                        <td>
+                            <%= product.price %>
+                        </td>
+                        <td> <img src=<%=product.thumbnail %> alt="" class=<%='tableImg'%>> </td>
+                    </tr>
+                    <% }) %>
+            </table>
+            <%} else { %>
+                <h2>No products available<h2>
+                        <%} %>
+                            <form action="/" method="get">
+                                <input type="submit" value="Volver a formulario" class="submitBtn">
+                            </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<div>
+    <h2>Submit a product</h2>
+
+    <form action="/api/productos" method="post" enctype="multipart/form-data">
+        <label for="title" class="formLabel">Name of the product:</label>
+        <br>
+        <input type="text" name="title" class="textInput" required>
+        <br>
+        <label for="title" class="formLabel">Price of the product:</label>
+        <br>
+        <input type="number" name="price" class="textInput" step=".01" required>
+        <br>
+        <label for="thumbnail" class="formLabel">Upload an image for the product. (You can get it from <a
+                href="https://www.iconfinder.com/icons" target="_blank">here</a>)</label>
+        <br>
+        <input type="file" name="thumbnail" class="fileInput" contentrequired>
+        <br>
+        <input type="submit" value="Submit product" class="submitBtn">
+    </form>
+    <!-- <form action="/api/productos" method="get">
+        <input type="submit" value="Ver Productos" class="submitBtn">
+    </form> -->
+</div>
+<div>
+    <br>
+    <h2>List of products</h2>
+
+    <% if(products){ %>
+        <table class='table'>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Img</th>
+            </tr>
+            <% products.forEach(product=>{ %>
+                <tr>
+                    <td>
+                        <%= product.id %>
+                    </td>
+                    <td>
+                        <%= product.title %>
+                    </td>
+                    <td>
+                        <%= product.price %>
+                    </td>
+                    <td> <img src=<%=product.thumbnail %> alt="" class=<%='tableImg'%>> </td>
+                </tr>
+                <% }) %>
+        </table>
+        <%} else { %>
+            <h2>No products available<h2>
+                    <%} %>
+                        <form action="/" method="get">
+                            <input type="submit" value="Volver a formulario" class="submitBtn">
+                        </form>
+</div>
